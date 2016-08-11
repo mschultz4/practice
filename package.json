@@ -1,0 +1,22 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "practice ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mschultz4/practice.git"
+  },
+  "author": "Matt Schultz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mschultz4/practice/issues"
+  },
+  "homepage": "https://github.com/mschultz4/practice#readme",
+  "devDependencies": {
+    "tape": "^4.6.0"
+  }
+}
