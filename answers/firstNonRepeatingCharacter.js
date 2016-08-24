@@ -44,3 +44,17 @@ function firstNonRepeatingCharacter(str) {
     catch (error) {
         console.log(error.message);
     }
+    
+    //find first non repeating character
+
+function nonRepeat(str){
+    for(var i=0; i < str.length; i++){
+        var matches = str.match(new RegExp(str[i], "ig"));
+        if(matches.length < 2){
+            return str[i];
+        }
+    }
+}
+
+
+nonRepeat("hhttaabbr");
