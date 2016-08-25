@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        textarea {
+            width: 400px;
+            height: 400px;
+            background-color: whitesmoke;
+            text-align: center;
+        }
+        
+        body {
+            padding: 30px;
+        }
+        
+        div {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <label>Radius:</label>
+        <input id="radiusInput" type="text" value="5" />
+        <button id="setRadius">Set Radius</button>
+    </div>
+    <div>
+        <textarea></textarea>
+    </div>
+    <script>
+        var radiusInput = document.getElementById("radiusInput");
+        var button = document.getElementById("setRadius");
+        var radius = radiusInput.value;
+        var textArea = document.getElementsByTagName("textarea")[0];
+
+        button.addEventListener("click", function(){
+            textArea.value = createString(radiusInput.value );
+        });
+
+        function createString(radius){
+            var str = "",
+                arr = [],
+                reversed;
+            
+            while(radius > 0)
+            {
+                str += createStars(radius * 2) + ",";
+                radius = radius % 2 === 0 ? 
+                    radius -2 :
+                    radius -1; 
+            }
+
+            arr = str.split(",");
+            reversed = str.split(",").reverse();
+            return reversed.concat(arr).join("\n");
+        }
+
+        function createStars(num){
+            var str = "";
+            while(num > 0){
+                str += "*";
+                num--;
+            }
+            return str;
+        }
+
+    </script>
+</body>
+
+</html>
