@@ -2,8 +2,8 @@
 
 var test = require("tape");
 
-function Node(value) {
-    this.value = value;
+function Node(data) {
+    this.data = data;
     this.next = null;
 }
 
@@ -19,20 +19,20 @@ List.prototype.find = find;
 
 /**
  * Add new node
- * @params {*} value of node to be added
+ * @params {*} data to be added to node
  * @returns undefined
  */ 
-function add(value) {
+function add(data) {
     var current;
     if (!this._head) {
-        this._head = new Node(value);
+        this._head = new Node(data);
     }
     else {
         current = this._head;
         while (current.next) {
             current = current.next;
         }
-        current.next = new Node(value);
+        current.next = new Node(data);
     }
     this._length += 1;
     
@@ -45,9 +45,9 @@ function add(value) {
  * @returns {object} the list
  */
 function remove(index){
-    var current = this._head,
+    var current   = this._head,
         previous,
-        count = 0;
+        count     = 0;
     
     if(this._length < 1 || index > this._length){
         console.log("no nodes to remove");
@@ -56,8 +56,8 @@ function remove(index){
     
    while(count < index){
       previous = current;
-      current = current.next;
-      count += 1;
+      current  = current.next;
+      count    += 1;
    } 
    
    previous.next = current.next;
@@ -71,7 +71,7 @@ function remove(index){
  * @returns {object} the node
  */
  function find(index){
-    var count = 0,
+    var count   = 0,
         current = this._head;
         
     if(this._length < 1 || index > this._length-1){
@@ -81,7 +81,7 @@ function remove(index){
     
     while(count < index){
        current = current.next; 
-       count += 1;
+       count   += 1;
     }
     
     return current;
@@ -104,8 +104,8 @@ test("Adds new node", function(t) {
     var list = new List();
     list.add("hello");
     list.add("howdy");
-    t.equal(list._head.value, "hello", "Adds head");
-    t.equal(list._head.next.value, "howdy", "Adds second node");
+    t.equal(list._head.data, "hello", "Adds head");
+    t.equal(list._head.next.data, "howdy", "Adds second node");
     t.equal(list._length, 2, "Increments length");
     t.end();
 });
@@ -122,14 +122,14 @@ test("Returns length", function(t) {
 test("Removes Node", function(t){
     var list = new List().add(1).add(2).add(3).remove(1);
     t.equals(new List().remove(), undefined, "handles no nodes");
-    t.equals(list._head.next.value, 3, "removes node");
+    t.equals(list._head.next.data, 3, "removes node");
     t.equals(list._length, 2, "adjusts length");
     t.end();
 });
 
 test("Finds node", function(t){
     var list = new List().add(1).add(2).add(3);
-    t.equals(list.find(2).value, 3, "finds node");
+    t.equals(list.find(2).data, 3, "finds node");
     t.equals(list.find(53), undefined, "Handles no node");
     t.end();
 })
