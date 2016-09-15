@@ -2,7 +2,7 @@ function nextVersion(v){
     var vList = v.split(".").map((x) => parseInt(x)),
         change = true;
 
-    for (var i = vList.length -1; i >= 0; i--){
+    for (var i = vList.length -1; i >= 0; i-- && i > 0){
         if(vList[i] === 9 && change){
             vList[i] = 0;
         } else if(change){
