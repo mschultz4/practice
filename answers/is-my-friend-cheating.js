@@ -3,7 +3,7 @@
 function sumAll(n){
     let sum = 0;
     
-    for (i = 1; i <= n; i++){
+    for (let i = 1; i <= n; i++){
       sum += i;
     }
 
