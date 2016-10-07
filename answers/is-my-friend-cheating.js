@@ -6,37 +6,33 @@ function sumAll(n){
     for (let i = 1; i <= n; i++){
       sum += i;
     }
-
+    
     return sum;
 }
 
-function findCombos(n){
+function removeNb(n){
+    let start = performance.now();
     let combos = [];
+    let sum = sumAll(n);
+    
+    test:
+    for ( let i = Math.floor(n/2); i <= n; i++){
+        for ( let j = i + 1; j <= n; j++) {
+                let prod = j * i;
+                let tot = sum - j - i;
 
-    for ( let i = 1; i <= n; i++){
-        for ( let j = 1; j <= n; j++) {
-            if (j !== i){
-                combos.push([i, j]);
-            }
+                if (prod === tot){
+                    combos.push([i, j], [j, i]);
+                     break;
+                }
+
+                if (prod > tot){
+                    break;
+                }
         }
     }
 
+    console.log(performance.now() - start);
+
     return combos;
-}
-
-function removeNb(n){
-    let removed = [];
-    let sum = sumAll(n);
-    
-    if (n === 0) return removed;
-    
-    findCombos(n).forEach(function(combo){
-        let comboSum = combo[0] + combo[1];
-
-        if (sum - comboSum === combo[0] * combo[1]){
-            removed.push(combo);
-        }
-    });
-
-    return removed;
 }
