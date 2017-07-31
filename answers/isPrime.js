@@ -1,50 +1,60 @@
-"use strict";
+import test from "tape";
 
-/** 
- * Is Prime
- * tests whether a number is prime or not
- * @param {number} num Number to test
+/**
+ * isPrime detects if input is prime 
+ * @param {number} num The number to check
  * @returns {boolean} 
+ * 
+ * Assumptions
+ * 1. 1, decimals, and negatives are not prime
  */
-function isPrime(num){
-    // type check
-    if(typeof num !== 'number'){
-        console.log('not a number');
-        return false;
-    }
 
-    // 2 is prime
-    if(num === 2){return true;}
+const isPrime = num => {
+  if (typeof num !== "number") {
+    throw TypeError(
+      "Expected type number but received: " +
+        Object.prototype.toString.call(num)
+    );
+  }
 
-    // remove even, 1, and negative numbers
-    if(num % 2 === 0 || num <= 1){return false;}
+  // remove simple cases: NaN, negatives and 1, and decimals
+  if (Number.isNaN(num) || num < 2 || num % 1 !== 0) return false;
+  if (num === 2) return true;
 
-    var divisor = 3;
-    while(divisor < num){
-        //if there is no remainder it is not prime
-        if(num % divisor === 0){
-            return false;
-        
-        // number can't be divided by greater than half itself
-        }else if(divisor >= num/2){
-            return true;
-        } else {
-            divisor++;
-        }
-    }
+  let divisor = 2;
 
-    return true;
-}
+  // numbers divided by more than their half will return decimal
+  while (divisor < num / 2) {
+    if (num % divisor === 0) return false;
+    divisor += 1;
+  }
+  return true;
+};
 
-function tests(){
-    console.log('A string is prime: ' + isPrime('boot'));
-    console.log('An object is prime: ' + isPrime({bob: 'hello'}))
-    console.log('Even number is prime: ' + isPrime(6));
-    console.log('A negative is prime: ' + isPrime(-7));
-    console.log('997 is prime: ' + (isPrime(997)));
-    console.log('1 is prime: ' + (isPrime(1)));
-    console.log('2 is prime: ' + (isPrime(2)));
-    console.log('3 is prime: ' + (isPrime(3)));
-}
+test("num is a number", t => {
+  t.throws(() => isPrime("boot"));
+  t.throws(() => isPrime({ bob: "hello" }));
+  t.throws(() => isPrime(["hello"]));
+  t.end();
+});
 
-module.exports = {isPrime: isPrime, tests: tests};
+test("num is not negative, decimal, or NaN", t => {
+  t.notOk(isPrime(-34));
+  t.notOk(isPrime(0.34));
+  t.notOk(isPrime(NaN));
+  t.end();
+});
+
+test("isPrime detects prime successfully", t => {
+  t.ok(isPrime(997), "997 is prime");
+  t.ok(isPrime(2), "2 is prime");
+  t.ok(isPrime(3), "3 is prime");
+  t.end();
+});
+
+test("isPrime returns false for non primes", t => {
+  t.notOk(isPrime(6));
+  t.notOk(isPrime(1));
+  t.notOk(isPrime(15));
+  t.end();
+});
