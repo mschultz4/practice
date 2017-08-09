@@ -10,6 +10,7 @@
 * What is REST, and why do people use it?
 * My website is slow. Walk me through diagnosing and fixing it. What are some performance optimizations people use, and when should they be used?
 * What frameworks have you used? What are the pros and cons of each? Why do people use frameworks? What kinds of problems do frameworks solve?
+* Async programming: promises vs async/await vs callbacks
 
 # Implement the following functions (tests follow each question):
 ## Easy
@@ -34,28 +35,13 @@ uniq([])                              // []
 uniq([1, 4, 2, 2, 3, 4, 8])           // [1, 4, 2, 3, 8]
 
 * intersection - Find the intersection of two arrays. Can you do it in O(M+N) time (where M and N are the lengths of the two arrays)?
-
-intersection([1, 5, 4, 2], [8, 91, 4, 1, 3])    // [4, 1]
-intersection([1, 5, 4, 2], [7, 12])             // []
-
-* sort - Implement the sort function to sort an array of numbers in O(N×log(N)) time.
-
-sort([])                              // []
-sort([-4, 1, Infinity, 3, 3, 0])      // [-4, 0, 1, 3, 3, Infinity]
-
+* sort - Implement the sort function to sort an array of numbers in O(N×log(N)) time. 
+* assignDeep - Like Object.assign, but merges objects deeply. For the sake of simplicity, you can assume that objects can contain only numbers and other objects (and not arrays, functions, etc.).
 * includes - Return true or false indicating whether the given number appears in the given sorted array. Can you do it in O(log(N)) time?
 
 includes([1, 3, 8, 10], 8)            // true
 includes([1, 3, 8, 8, 15], 15)        // true
 includes([1, 3, 8, 10, 15], 9)        // false
-
-* assignDeep - Like Object.assign, but merges objects deeply. For the sake of simplicity, you can assume that objects can contain only numbers and other objects (and not arrays, functions, etc.).
-
-assignDeep({ a: 1 }, {})              // { a: 1 }
-assignDeep({ a: 1 }, { a: 2 })        // { a: 2 }
-assignDeep({ a: 1 }, { a: { b: 2 } }) // { a: { b: 2 } }
-assignDeep({ a: { b: { c: 1 }}}, { a: { b: { d: 2 }}, e: 3 })
-// { a: { b: { c: 1, d: 2 }}, e: 3 }
 
 * reduceAsync - Like the reduce you implemented in the Easy section, but each item must be resolved before continuing onto the next.
 
@@ -75,15 +61,15 @@ let c = () => Promise.resolve('c')
 await seq([a, b, c])                  // ['a', 'b', 'c']
 await seq([a, c, b])                  // ['a', 'c', 'b']
 
-Harder
+## Advanced
 Note: For the data structures you’ll implement below, the idea isn’t to memorize them, but just to be able to look at the given API, Google how they work, and implement them, and to have a high level idea of what they are used for and what their tradeoffs are compared to other data structures.
 
-permute - Return an array of strings, containing every permutation of the given string.
+* permute - Return an array of strings, containing every permutation of the given string.
 
 permute('')             // []
 permute('abc')          // ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 
-debounce - Implement the debounce function.
+* debounce - Implement the debounce function.
 
 let a = () => console.log('foo')
 let b = debounce(a, 100)
@@ -91,7 +77,7 @@ b()
 b()
 b() // only this call should invoke a()
 
-Implement a LinkedList class without using JavaScript’s built-in arrays ([]). Your LinkedList should support just 2 methods: add and has:
+* Implement a LinkedList class without using JavaScript’s built-in arrays ([]). Your LinkedList should support just 2 methods: add and has:
 
 class LinkedList {...}
 let list = new LinkedList(1, 2, 3)
@@ -101,7 +87,7 @@ list.has(1)                           // true
 list.has(4)                           // true
 list.has(6)                           // false
 
-Implement a HashMap class without using JavaScript’s built-in objects ({}) or Maps. You are provided a hash() function that takes a string and returns a number (the numbers are mostly unique, but sometimes two different strings will return the same number):
+* Implement a HashMap class without using JavaScript’s built-in objects ({}) or Maps. You are provided a hash() function that takes a string and returns a number (the numbers are mostly unique, but sometimes two different strings will return the same number):
 
 function hash (string) {
   return string
@@ -119,7 +105,7 @@ map.get('abc')                        // 123
 map.get('foo')                        // 'baz'
 map.get('def')                        // undefined
 
-Implement a BinarySearchTree class. It should support 4 methods: add, has, remove, and size:
+* Implement a BinarySearchTree class. It should support 4 methods: add, has, remove, and size:
 
 let tree = new BinarySearchTree
 tree.add(1, 2, 3, 4)
@@ -129,7 +115,7 @@ tree.has(5)                           // true
 tree.remove(3)                        // undefined
 tree.size()                           // 4
 
-Implement a BinaryTree class with breadth first search and inorder, preorder, and postorder depth first search functions.
+* Implement a BinaryTree class with breadth first search and inorder, preorder, and postorder depth first search functions.
 
 let tree = new BinaryTree
 let fn = value => console.log(value)
@@ -139,11 +125,11 @@ tree.inorder(fn)                      // undefined
 tree.preorder(fn)                     // undefined
 tree.postorder(fn)                    // undefined
 
-Debugging
+## Debugging
 
 For each of the following questions, start by understanding and explaining why the given piece of code doesn’t work. Then propose a couple of fixes, and rewrite the code to implement one of the fixes you proposed so the program works correctly:
 
-I want this code to log out "hey amy", but it logs out "hey arnold" - why?
+* I want this code to log out "hey amy", but it logs out "hey arnold" - why?
 
 function greet(person) {
   if (person == { name: 'amy' }) {
@@ -154,11 +140,13 @@ function greet(person) {
 }
 greet({ name: 'amy' })
 
+* What does this log?
+
 for (var i = 0; i < 4; i++) {
   setTimeout(() => console.log(i), 0)
 }
 
-I want this code to log out "doggo", but it logs out undefined!
+* I want this code to log out "doggo", but it logs out undefined!
 
 let dog = {
   name: 'doggo',
@@ -169,7 +157,7 @@ let dog = {
 let sayName = dog.sayName
 sayName()
 
-I want my dog to bark(), but instead I get an error. Why?
+* I want my dog to bark(), but instead I get an error. Why?
 
 function Dog(name) {
   this.name = name
@@ -180,7 +168,7 @@ Dog.bark = function() {
 let fido = new Dog('fido')
 fido.bark()
 
-Why does this code return the results that it does?
+* Why does this code return the results that it does?
 
 function isBig(thing) {
   if (thing == 0 || thing == 1 || thing == 2) {
@@ -192,11 +180,11 @@ isBig(1)    // false
 isBig([2])  // false
 isBig([3])  // true
 
-System design
-## Resources
-* https://github.com/donnemartin/system-design-prime 
+## System design
+### Resources
+* https://github.com/donnemartin/system-design-primer 
 
-## Questions
+### Questions
 * Talk me through a full stack implemention of an autocomplete widget. A user can type text into it, and get back results from a server.
 
 * How would you design a frontend to support the following features:
@@ -213,6 +201,18 @@ System design
   - How do you update tweets as new ones come in? How do you know when new ones came in?
   - How do you search tweets? How do you search by author? Talk me through your database, backend, and API designs.
 
-# Further resources
+# Resume/linkedin tips
+## linkedin search
+1. Adequately and accurately describe your position in your title fields. These are the most important fields for both getting found in search as well as getting clicked on.
+2. Have as many connections as possible
+3. Have your location set (where you want to get a job)
+4. Select your company from the autofill option when stating who you currently and previously worked for
+5. Communicate regularly with the top recruiters, even if it’s just to say hi
 
+# Further resources
+Javascript Allonge
+Eloquent javascript
+http://amzn.to/2uz3vEG
+http://amzn.to/2uvUrR7
+https://medium.freecodecamp.org/how-to-interview-your-interviewers-f8f65ac57b80
 
