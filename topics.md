@@ -66,8 +66,6 @@ Note: For the data structures you’ll implement below, the idea isn’t to memo
 
 * permute - Return an array of strings, containing every permutation of the given string.
 
-permute('')             // []
-permute('abc')          // ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
 
 * debounce - Implement the debounce function.
 
