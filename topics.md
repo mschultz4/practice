@@ -38,11 +38,6 @@ uniq([1, 4, 2, 2, 3, 4, 8])           // [1, 4, 2, 3, 8]
 * sort - Implement the sort function to sort an array of numbers in O(N×log(N)) time. 
 * assignDeep - Like Object.assign, but merges objects deeply. For the sake of simplicity, you can assume that objects can contain only numbers and other objects (and not arrays, functions, etc.).
 * includes - Return true or false indicating whether the given number appears in the given sorted array. Can you do it in O(log(N)) time?
-
-includes([1, 3, 8, 10], 8)            // true
-includes([1, 3, 8, 8, 15], 15)        // true
-includes([1, 3, 8, 10, 15], 9)        // false
-
 * reduceAsync - Like the reduce you implemented in the Easy section, but each item must be resolved before continuing onto the next.
 
 let a = () => Promise.resolve('a')
@@ -65,8 +60,6 @@ await seq([a, c, b])                  // ['a', 'c', 'b']
 Note: For the data structures you’ll implement below, the idea isn’t to memorize them, but just to be able to look at the given API, Google how they work, and implement them, and to have a high level idea of what they are used for and what their tradeoffs are compared to other data structures.
 
 * permute - Return an array of strings, containing every permutation of the given string.
-
-
 * debounce - Implement the debounce function.
 
 let a = () => console.log('foo')
@@ -76,15 +69,6 @@ b()
 b() // only this call should invoke a()
 
 * Implement a LinkedList class without using JavaScript’s built-in arrays ([]). Your LinkedList should support just 2 methods: add and has:
-
-class LinkedList {...}
-let list = new LinkedList(1, 2, 3)
-list.add(4)                           // undefined
-list.add(5)                           // undefined
-list.has(1)                           // true
-list.has(4)                           // true
-list.has(6)                           // false
-
 * Implement a HashMap class without using JavaScript’s built-in objects ({}) or Maps. You are provided a hash() function that takes a string and returns a number (the numbers are mostly unique, but sometimes two different strings will return the same number):
 
 function hash (string) {
@@ -104,14 +88,6 @@ map.get('foo')                        // 'baz'
 map.get('def')                        // undefined
 
 * Implement a BinarySearchTree class. It should support 4 methods: add, has, remove, and size:
-
-let tree = new BinarySearchTree
-tree.add(1, 2, 3, 4)
-tree.add(5)
-tree.has(2)                           // true
-tree.has(5)                           // true
-tree.remove(3)                        // undefined
-tree.size()                           // 4
 
 * Implement a BinaryTree class with breadth first search and inorder, preorder, and postorder depth first search functions.
 
@@ -181,6 +157,7 @@ isBig([3])  // true
 ## System design
 ### Resources
 * https://github.com/donnemartin/system-design-primer 
+* https://www.quora.com/How-do-you-answer-the-interview-question-How-would-you-design-and-scale-a-platform-like-Twitter
 
 ### Questions
 * Talk me through a full stack implemention of an autocomplete widget. A user can type text into it, and get back results from a server.
